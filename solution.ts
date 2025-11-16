@@ -94,12 +94,12 @@ const calculateTotalPrice = (products: IProduct[]): number => {
     let total = 0;
 
     for (const product of products) {
-        const priceWithoutDiscount = product.price * product.quantity;
-        const discountedPrice = product.discount
-            ? priceWithoutDiscount * (1 - product.discount / 100)
-            : priceWithoutDiscount;
+        const totalPrice = product.price * product.quantity;
+        const discountPrice = product.discount
+            ? totalPrice * (1 - product.discount / 100)
+            : totalPrice;
 
-        total += discountedPrice;
+        total += discountPrice;
     }
 
     return total;
