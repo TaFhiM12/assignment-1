@@ -17,7 +17,6 @@ const getLength = (value: string | any[]): number => {
     else if (Array.isArray(value)) {
         return value.length;
     }
-
     return 0;
 }
 
@@ -63,11 +62,11 @@ interface Book {
     publishedYear: number;
     isAvailable: boolean;
 }
-
 const printBookDetails = (book : Book): void => {
     const available : string = book.isAvailable ? 'Yes' : 'No';
     console.log(`Title: ${book.title}, Author: ${book.author}, Published: ${book.publishedYear}, Available: ${available}`)
 }
+
 
 type ArrayType = (string | number)[];
 const getUniqueValues = (array1: ArrayType, array2: ArrayType) : ArrayType => {
