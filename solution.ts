@@ -69,18 +69,25 @@ const printBookDetails = (book : Book): void => {
 
 
 type ArrayType = (string | number)[];
-const getUniqueValues = (array1: ArrayType, array2: ArrayType) : ArrayType => {
-    const ans : ArrayType = [];
-    for(const element of array1){
-        if(!ans.includes(element)) ans.push(element);
-    }
-
-    for(const element of array2){
-        if(!ans.includes(element)) ans.push(element);
-    }
-
+const getUniqueValues = (array1: ArrayType, array2: ArrayType): ArrayType => {
+    const ans: ArrayType = [];
+    const unique = (value: string | number) => {
+        let exists = false;
+        for (let i = 0; i < ans.length; i++) {
+            if (ans[i] === value) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            ans.push(value);
+        }
+    };
+    for (let i = 0; i < array1.length; i++) unique(array1[i]);
+    for (let i = 0; i < array2.length; i++) unique(array2[i]);
     return ans;
-}
+};
+
 
 
 interface IProduct {
@@ -90,16 +97,13 @@ interface IProduct {
     discount?: number;
 }
 const calculateTotalPrice = (products: IProduct[]): number => {
-    let total = 0;
-
-    for (const product of products) {
-        const totalPrice = product.price * product.quantity;
-        const discountPrice = product.discount
-            ? totalPrice * (1 - product.discount / 100)
-            : totalPrice;
-
-        total += discountPrice;
-    }
-
-    return total;
+  return products
+    .map(product => {
+      const totalPrice = product.price * product.quantity;
+      const finalPrice = product.discount
+        ? totalPrice * (1 - product.discount / 100)
+        : totalPrice;
+      return finalPrice;
+    })
+    .reduce((sum, price) => sum + price, 0);
 };
