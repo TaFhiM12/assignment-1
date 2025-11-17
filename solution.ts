@@ -89,7 +89,6 @@ const getUniqueValues = (array1: ArrayType, array2: ArrayType): ArrayType => {
 };
 
 
-
 interface IProduct {
     name: string;
     price: number;
@@ -100,9 +99,7 @@ const calculateTotalPrice = (products: IProduct[]): number => {
   return products
     .map(product => {
       const totalPrice = product.price * product.quantity;
-      const finalPrice = product.discount
-        ? totalPrice * (1 - product.discount / 100)
-        : totalPrice;
+      const finalPrice = product.discount ? totalPrice * (1 - product.discount / 100) : totalPrice;
       return finalPrice;
     })
     .reduce((sum, price) => sum + price, 0);
